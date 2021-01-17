@@ -1,0 +1,11 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+     - ./:/cook_pod
+    command: sh -c "npm start"
+    ports:
+     - "3000:3000"
