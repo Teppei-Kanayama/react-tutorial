@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import './index.css';
 
 function Square(props) {
@@ -55,7 +56,7 @@ class Game extends React.Component {
     };
   }
 
-  handleClick(i) {
+  handleClick(i, func) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
@@ -71,6 +72,8 @@ class Game extends React.Component {
       stepNumber: this.state.stepNumber + 1,
       xIsNext: !this.state.xIsNext
     });
+
+    func();
   }
 
   jumpTo(step) {
@@ -101,12 +104,26 @@ class Game extends React.Component {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
 
+    const getProfile = async () => {
+      console.log('hoge');
+      try {
+        const result = await axios.get(
+          'https://api.github.com/users/Teppei-Kanayama'
+        );
+        console.log(result);
+      } catch (error) {
+        console.log('error :/');
+      }
+    };
+
+    console.log('I was triggered during render');
+
     return (
       <div className="game">
         <div className="game-board">
           <Board
             squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
+            onClick={(i) => this.handleClick(i, getProfile)}
             />
         </div>
         <div className="game-info">
