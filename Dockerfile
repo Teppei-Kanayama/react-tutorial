@@ -7,4 +7,6 @@ RUN npm install
 
 COPY . /react-tutorial
 
+CMD npm run dev
+
 EXPOSE 3000
