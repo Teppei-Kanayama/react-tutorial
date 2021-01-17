@@ -1,10 +1,10 @@
 FROM node:15.5.1-alpine3.10
-WORKDIR /cook_pod
+WORKDIR /react-tutorial
 
-COPY package.json /cook_pod/package.json
-COPY package-lock.json /cook_pod/package-lock.json
+COPY package.json /react-tutorial/package.json
+COPY package-lock.json /react-tutorial/package-lock.json
 RUN npm install
 
-COPY . /cook_pod
+COPY . /react-tutorial
 
 EXPOSE 3000
